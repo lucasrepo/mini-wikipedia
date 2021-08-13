@@ -1,3 +1,5 @@
-<?php //HECHO POR LUCAS NUÑEZ, @SENOCOSENO
+<?php
 include("includes/header.php");
+include("includes/style.html");
 include("includes/footer.php");
+?>
