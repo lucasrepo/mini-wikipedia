@@ -1,5 +1,5 @@
 # MyWiki: 
-**_Crea, Actualiza y Carga_** contenido en un text-area para todos. Toda información es almacenado en una base de datos, en auth.php se realiza la configuración. 
+**_Crea, Actualiza y Carga_** contenido en un text-area para todos. Toda información es almacenado en una base de datos, en scripts/auth.php se realiza la configuración. 
 ## Por realizar:
 * Acceder a las publicaciones recientes con un __click__.
 * La posibilidad de añadir imágenes.
