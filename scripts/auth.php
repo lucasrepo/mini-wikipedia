@@ -18,13 +18,13 @@ else
 function otherPost(){
 
 	global $conn; $i=0;
-	$mydb_query = "SELECT nombre, texto FROM general ORDER BY id DESC LIMIT 7;";
+	$mydb_query = "SELECT nombre, texto, fecha FROM general ORDER BY id DESC LIMIT 7;";
 
 	if($result = mysqli_query($conn, $mydb_query))
 	{
 		while($row = mysqli_fetch_array($result))
 		{
-			echo "\t\t<div>\n\t\t\t<div>\n\t\t\t\t<h3>".$row['nombre']." #".$i."</h3>\n\t\t\t</div>\n\t\t\t<p>".$row['texto']."\n\t\t\t</p>\t\t</div>\n\n"; $i++;
+			echo "\t\t<div>\n\t\t\t<div>\n\t\t\t\t<h3>".$row['nombre']."</h3><h4 style='font-size: x-small;'>Last update: ".substr($row['fecha'], 11)."</h4>\n\t\t\t</div>\n\t\t\t<textarea>".$row['texto']."\n\t\t\t</textarea>\t\t</div>\n\n"; $i++;
 		}
 	}
 }
