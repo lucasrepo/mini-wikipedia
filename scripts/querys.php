@@ -4,13 +4,23 @@ function select($name) : string {
 	return $s;
 }
 
-function update($text, $name) : string {
-	$u = "UPDATE general SET texto='" . $text ."' WHERE nombre='". $name ."';";
+function getRealIP() : string {
+
+    if(isset($_SERVER["HTTP_CLIENT_IP"]))			 return $_SERVER["HTTP_CLIENT_IP"];
+	else if(isset($_SERVER["HTTP_X_FORWARDED_FOR"])) return $_SERVER["HTTP_X_FORWARDED_FOR"];
+	else if(isset($_SERVER["HTTP_X_FORWARDED"])) 	 return $_SERVER["HTTP_X_FORWARDED"];
+	else if(isset($_SERVER["HTTP_FORWARDED_FOR"])) 	 return $_SERVER["HTTP_FORWARDED_FOR"];
+	else if(isset($_SERVER["HTTP_FORWARDED"])) 		 return $_SERVER["HTTP_FORWARDED"];
+	else											 return $_SERVER["REMOTE_ADDR"];
+}
+
+function update($text, $name, $ipv4) : string {
+	$u = "UPDATE general SET texto='" . $text ."', IPV4='". $ipv4 ."' WHERE nombre='". $name ."';";
 	return $u;
 }
 
-function insert($name, $text) : string {
-	$i = "INSERT INTO general(nombre, texto) VALUES ('". $name . "', '" . $text . "')";
+function insert($name, $text, $ipv4, $password='') : string {
+	$i = "INSERT INTO general(nombre, texto, contrasenia, IPV4) VALUES ('". $name . "', '" . $text . "', '". $password . "', '". $ipv4 ."');";
 	return $i;
 }
 

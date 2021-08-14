@@ -10,6 +10,9 @@ if(!empty($_GET['error'])) alert($_GET['error']);
 	<base href="/index" />
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="icon" type="img/icon" href="img/favicon.ico">
+	<link rel="icon" href="http://www.landho.epizy.com/img/favicon.ico?v=2" />
     <link rel="preload" href="img/starsbg.gif" as="image">
+    <link rel="preload" href="img/favicon.ico" as="image">
+    <link rel="preload" href="img/eye.png" as="image">
+    <link rel="preload" href="img/eyeslash.png" as="image">
 	<?php title($_SESSION['name']) ?>

@@ -10,7 +10,10 @@ function alert($message){
 		echo '") </script>';
 	}
 }
-
+function notification(){
+    if(!isset($_SESSION['pass']))
+        echo "<div style='background-color: blue'>\n\t\t\t\t\t<span style='text-align: center'>Protect your notes with any password!</span>\n\t\t\t\t</div>\n";
+}
 function title($name){
     if(!empty($name)):
 	    echo "<script> document.title = 'Project: $name' </script>";
@@ -35,4 +38,16 @@ function dontBack(){
 		$_SESSION['GET'][] = $_GET;
 	}
 }
+function setPassword() : string {
+    if(isset($_SESSION['pass'])):
+        return "value='".$_SESSION['pass']."'";
+    else:
+        $arr = str_split('ABCDEFGHIJKLMNOPQRSTXYWZabcdefghijklmnopqrstxyz012345679');
+        shuffle($arr); // randomize the array
+        $arr = array_slice($arr, 0, 8); // get the first 8 (random) characters out
+        $str = implode('', $arr); // smush them back into a string
+        return "value='".$str."'";
+    endif;
+}
+
 ?>
