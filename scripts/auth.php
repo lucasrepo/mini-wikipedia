@@ -14,7 +14,7 @@ else
 {
 	header('Location: /index');
 }
-
+// LA FUNCION ESTÁ MAL UBICADA. TENDRÍA QUE IR EN /functions DE /includes/ 
 function otherPost(){
 
 	global $conn;
