@@ -6,12 +6,12 @@ function select($name) : string {
 
 function getRealIP() : string {
 
-    if(isset($_SERVER["HTTP_CLIENT_IP"]))			 return $_SERVER["HTTP_CLIENT_IP"];
+    if(isset($_SERVER["HTTP_CLIENT_IP"]))		 return $_SERVER["HTTP_CLIENT_IP"];
 	else if(isset($_SERVER["HTTP_X_FORWARDED_FOR"])) return $_SERVER["HTTP_X_FORWARDED_FOR"];
 	else if(isset($_SERVER["HTTP_X_FORWARDED"])) 	 return $_SERVER["HTTP_X_FORWARDED"];
 	else if(isset($_SERVER["HTTP_FORWARDED_FOR"])) 	 return $_SERVER["HTTP_FORWARDED_FOR"];
-	else if(isset($_SERVER["HTTP_FORWARDED"])) 		 return $_SERVER["HTTP_FORWARDED"];
-	else											 return $_SERVER["REMOTE_ADDR"];
+	else if(isset($_SERVER["HTTP_FORWARDED"])) 	 return $_SERVER["HTTP_FORWARDED"];
+	else						 return $_SERVER["REMOTE_ADDR"];
 }
 
 function update($text, $name, $ipv4) : string {
@@ -24,21 +24,23 @@ function insert($name, $text, $ipv4, $password='') : string {
 	return $i;
 }
 
-function exist($name) // IF EXIST $name RETURN TRUE
+function validate($name, mysqli $conn) : int {
+	$validate = mysqli_query($conn, "SELECT nombre FROM general WHERE nombre='".$name."';");
+	$num_rows = mysqli_num_rows($validate);
+	return $num_rows;
+}
+
+function exist($name) // Si el input de tipo button $name existe : true.
 {
 	return array_key_exists($name, $_POST);
 }
 
-function isEmpty($name){
+function isEmpty($name)
+{
 	if(empty($name)) homeError(1, "The field name is required");
 }
 
-function homeError($number, $message){
+function homeError($number, $message)
+{
 	header("Location: /index?error=FATAL-ERROR-" . $number . ": $message."); exit;
-}
-
-function validate($name, mysqli $conn) {
-	$validate = mysqli_query($conn, "SELECT nombre FROM general WHERE nombre='".$name."';");
-	$num_rows = mysqli_num_rows($validate);
-	return $num_rows;
 }
