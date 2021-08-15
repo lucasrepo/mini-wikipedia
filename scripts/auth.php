@@ -5,15 +5,11 @@ $DATABASE_PASS = '';
 $DATABASE_NAME = 'usuarios';
 
 $conn = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
-if(mysqli_connect_errno())
-{
-	$error = mysqli_connect_error(); 
-	header('Location: /index?error=No existe conexión con MySQL: $error'); exit;
-}
+if($error = mysqli_connect_errno())
+	header('Location: /index?error=No existe conexión con la base de datos: $error'); exit;
 else
-{
 	header('Location: /index');
-}
+
 // LA FUNCION ESTÁ MAL UBICADA. TENDRÍA QUE IR EN /functions DE /includes/ 
 function otherPost(){
 
