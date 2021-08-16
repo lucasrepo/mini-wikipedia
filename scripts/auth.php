@@ -5,12 +5,16 @@ $DATABASE_PASS = '';
 $DATABASE_NAME = 'usuarios';
 
 $conn = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
-if($error = mysqli_connect_errno())
-	header('Location: /index?error=No existe conexión con la base de datos: $error'); exit;
+if(mysqli_connect_errno())
+{
+	$error = mysqli_connect_error(); 
+	header('Location: /index?error=No existe conexión con MySQL: $error'); exit;
+}
 else
+{
 	header('Location: /index');
+}
 
-// LA FUNCION ESTÁ MAL UBICADA. TENDRÍA QUE IR EN /functions DE /includes/ 
 function otherPost(){
 
 	global $conn;
@@ -20,7 +24,7 @@ function otherPost(){
 	{
 		while($row = mysqli_fetch_array($result))
 		{
-			echo "\t\t<div>\n\t\t\t<div>\n\t\t\t\t<h3>".$row['nombre']."</h3><h4 style='font-size: x-small;'>Last update: ".substr($row['fecha'], 11)."</h4>\n\t\t\t</div>\n\t\t\t<textarea>".$row['texto']."\n\t\t\t</textarea>\t\t</div>\n\n";
+			echo "\t\t<div>\n\t\t\t<div>\n\t\t\t\t<h3><a href='/index?name=".$row['nombre']."&information=".$row['texto']."'>".$row['nombre']."</a></h3><h4 style='font-size: x-small;'>Last update: ".substr($row['fecha'], 11)."</h4>\n\t\t\t</div>\n\t\t\t<textarea>".$row['texto']."\n\t\t\t</textarea>\t\t</div>\n\n";
 		}
 	}
 }
