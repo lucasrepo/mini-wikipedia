@@ -44,3 +44,13 @@ function homeError($number, $message)
 {
 	header("Location: /index?error=FATAL-ERROR-" . $number . ": $message."); exit;
 }
+function unsetSuperglobalGet($name)
+{
+	if(isset($_GET[$name]))
+    	unset($_GET[$name]);
+}
+function unsetSuperglobalSession($name)
+{
+	if(isset($_SESSION[$name]))
+    	unset($_SESSION[$name]);
+}
