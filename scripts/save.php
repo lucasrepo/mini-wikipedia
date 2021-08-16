@@ -73,6 +73,9 @@ else:
 	homeError(2, "Error sin identificar");
 endif;
 
+unsetSuperglobalGet("name"); unsetSuperglobalGet("information");
+unsetSuperglobalSession("name"); unsetSuperglobalSession("information");
+
 //QUERY TO DB
 if($result = mysqli_query($conn, $mydb_query))
 {
