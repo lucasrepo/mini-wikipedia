@@ -1,29 +1,43 @@
 <?php session_start();
-// INCLUDES
+/* ESENCIAL */
 	include_once("auth.php");
 	include("querys.php");
 
-// DECLARATIONS
-	$name = htmlspecialchars($_POST['name']);
-	$text = htmlspecialchars($_POST['t-area']);
-// CHECK VARIABLES
+/*Filtro XSS básico*/
+$name = htmlspecialchars($_POST['name']);
+$text = htmlspecialchars($_POST['t-area']);
+
+/*Si está vacío regresa a home*/
 isEmpty($name);
 
-// CHECK BUTTONS
 if (exist('load')):
 	
 	if(validate($name, $conn) == 0)
-		homeError(5, "El archivo no existe, crea uno nuevo o intenta con otra busqueda");
+		homeError(0, "El archivo no existe, crea uno nuevo o intenta con otra busqueda");
 
 	$mydb_query = select($name);
 	$state = "Load";
+elseif (exist('add')): /*ADD ADD ADD*/
+
+    if(validate($name, $conn) == 0)
+        homeError(0, "El archivo no existe, crea uno nuevo o intenta con otra busqueda");
+    if(!isset($_SESSION['favs']))
+        $_SESSION['favs'] = 0;
+    else{
+        $_SESSION['favs']++;
+    }
+    $value_c = "value[" . $name . "]";
+    $value = str_replace(" ", "-", $value_c);
+    /* INFORMATION */
+    setcookie($value, $text, time()+(60*60*24*30), "/");
+    header("Location: /index?state=add"); exit;
 
 elseif (exist('update')): /* UPDATE UPDATE UPDATE */
 
     if(empty($text))
-    	homeError(2, "The field text is required!");
+    	homeError(0, "The field text is required!");
 
-    /*VERIFICATION*/
+    /*QUERY VERIFICACION PSW*/
     $mydb_query = select($name);
     if($pre_result = mysqli_query($conn, $mydb_query))
     {
@@ -36,22 +50,13 @@ elseif (exist('update')): /* UPDATE UPDATE UPDATE */
                     if(password_verify($_POST['pass'], $row['contrasenia']))
                     {
                         $_SESSION['pass'] = $_POST['pass'];
-                        $state = "Update";
                         $mydb_query = update($text, $name, getRealIP());
-
-                        if(mysqli_query($conn, $mydb_query))
-                        {
-                            $_SESSION['name'] = $name;
-                            $_SESSION['information'] = $text;
-                            header("Location: /index?state=$state"); exit;
-
-                        } else { homeError(8, "LAST QUERY"); }
-                    } else { homeError(8, "La contraseña no coincide"); }
-                } else { homeError(10, "Este contenido se encuentra protegido, ingresa la contraseña para modificar."); }
-            } else { $mydb_query = update($text, $name, getRealIP()); } //UPDATE W/NO PASSW
-        } else { homeError(8, "El contenido que busca no existe"); }
-    } else { homeError(7, "No se pudo realizar la petición"); }
-    
+                    } else { homeError(4, "La contraseña no coincide"); }
+                } else { homeError(3, "Este contenido se encuentra protegido, ingresa la contraseña para modificar"); }
+            } else { $mydb_query = update($text, $name, getRealIP()); } /*SIN PSW*/
+        } else { homeError(2, "El contenido que busca no existe"); }
+    } else { homeError(111, "No se pudo realizar la petición"); }
+    $state = "Update";
 elseif (exist('new')):
 
 	if(empty($text)):
@@ -63,34 +68,35 @@ elseif (exist('new')):
             homeError(2, "Password must include at least one number!");
         if(!preg_match("#[A-Z]+#", $_POST['pass']))
             homeError(2, "Password must include at least one CAPS!");
-        // CREATE HASH TO INSERT INTO TABLE
         $hpass = password_hash($_POST['pass'], PASSWORD_DEFAULT);
+        $mydb_query = insert($name, $text, getRealIP(), $hpass);
+    else:
+        $mydb_query = insert($name, $text, getRealIP());
     endif;
-	$mydb_query = insert($name, $text, getRealIP(), $hpass);
 	$state = "New";
 
 else: 
-	homeError(2, "Error sin identificar");
+	homeError(222, "Error sin identificar, repita los pasos y reportalo con un moderador");
 endif;
 
 unsetSuperglobalGet("name"); unsetSuperglobalGet("information");
 unsetSuperglobalSession("name"); unsetSuperglobalSession("information");
 
-//QUERY TO DB
+/* QUERY */
 if($result = mysqli_query($conn, $mydb_query))
 {
 	$_SESSION['name'] = $name;
 
-	if(!empty($row = mysqli_fetch_assoc($result))) /* LOAD LOAD QUERY*/
+	if(!empty($row = mysqli_fetch_assoc($result))) /* CARGAR/ACTUALIZAR */
 	{
         $_SESSION['information'] = $row['texto'];
         header("Location: /index?state=$state"); exit;
 	}
-	else //NEW CONTENT TO SAVE
+	else /* GUARDAR */
 	{
 		$_SESSION['information'] = $text;
         $_SESSION['pass'] = $_POST['pass'];
 		header("Location: /index?state=$state"); exit;
 	}
 }
-homeError(3, "No se pudo realizar la conexión con base de datos");
+homeError(333, "No se pudo realizar la conexión con base de datos");

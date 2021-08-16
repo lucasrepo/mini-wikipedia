@@ -18,12 +18,10 @@ function update($text, $name, $ipv4) : string {
 	$u = "UPDATE general SET texto='" . $text ."', IPV4='". $ipv4 ."' WHERE nombre='". $name ."';";
 	return $u;
 }
-
 function insert($name, $text, $ipv4, $password='') : string {
 	$i = "INSERT INTO general(nombre, texto, contrasenia, IPV4) VALUES ('". $name . "', '" . $text . "', '". $password . "', '". $ipv4 ."');";
 	return $i;
 }
-
 function validate($name, mysqli $conn) : int {
 	$validate = mysqli_query($conn, "SELECT nombre FROM general WHERE nombre='".$name."';");
 	$num_rows = mysqli_num_rows($validate);
@@ -42,8 +40,10 @@ function isEmpty($name)
 
 function homeError($number, $message)
 {
-	header("Location: /index?error=FATAL-ERROR-" . $number . ": $message."); exit;
+	header("Location: /index?error=error " . $number . ": $message."); exit;
 }
+
+
 function unsetSuperglobalGet($name)
 {
 	if(isset($_GET[$name]))
