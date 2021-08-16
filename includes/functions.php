@@ -14,14 +14,16 @@ function notification(){
     if(!isset($_SESSION['pass']))
         echo "<div style='background-color: blue'>\n\t\t\t\t\t<span style='text-align: center'>Protect your notes with any password!</span>\n\t\t\t\t</div>\n";
 }
-function title($name){
+function title($name, $scd_name){
     if(!empty($name)):
 	    echo "<script> document.title = 'Project: $name' </script>";
+	elseif(!empty($scd_name)):
+		echo "<script> document.title = 'Project: $scd_name' </script>";
     else:
         echo "<script> document.title = 'MyWiki' </script>";
     endif;
 }
-
+/*
 function dontBack(){
 	if(!empty($_GET))
 	{
@@ -38,6 +40,7 @@ function dontBack(){
 		$_SESSION['GET'][] = $_GET;
 	}
 }
+*/
 function setPassword() : string {
     if(isset($_SESSION['pass'])):
         return "value='".$_SESSION['pass']."'";
@@ -49,5 +52,9 @@ function setPassword() : string {
         return "value='".$str."'";
     endif;
 }
-
+function showInfo($name, $msg = '') : string {
+	if(isset($_GET[$name])) $msg = $_GET[$name];
+	else if(isset($_SESSION[$name])) $msg = $_SESSION[$name];
+	return $msg;
+}
 ?>

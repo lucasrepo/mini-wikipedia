@@ -1,7 +1,7 @@
 <?php session_start();
-// AUXILIAR FUNCTIONS
+/* FUNCION AUXILIAR */
 	include("functions.php");
-dontBack();
+/*dontBack();*/
 if(!empty($_GET['error'])) alert($_GET['error']);
 ?>
 <!DOCTYPE html>
@@ -15,4 +15,4 @@ if(!empty($_GET['error'])) alert($_GET['error']);
     <link rel="preload" href="img/favicon.ico" as="image">
     <link rel="preload" href="img/eye.png" as="image">
     <link rel="preload" href="img/eyeslash.png" as="image">
-	<?php title($_SESSION['name']) ?>
+	<?php title($_GET['name'], $_SESSION['name']) ?>
