@@ -13,7 +13,7 @@
                 cols="100" 
                 maxlength="3000"
                 minlength="10" 
-                placeholder="Write your things here..." 
+                placeholder="Carga, actualiza o crea una publicación..." 
                 autofocus><?php echo showInfo("information"); ?></textarea>
             </div>
             <div class="center" id="grad2">
@@ -21,24 +21,34 @@
                 notification();
                 ?>
                 <div>
-                    <input type="text" name="name" id="name" maxlength="30" placeholder="Title" <?php echo value(showInfo("name")); ?>>
-                    <input type="password" name="pass" maxlength="30" placeholder="[Password]" id="psw" <?php echo setPassword(); ?>><i onclick="showPassword()" id="togglePassword" alt="Show/Hide Password"><img src="img/eye.png" id="eye"></i>
+                    <input type="text" name="name" id="name" maxlength="30" placeholder="Título" <?php echo value(showInfo("name")); ?>>
+                    <input type="password" name="pass" maxlength="30" placeholder="[Contraseña]" id="psw" <?php echo setPassword(); ?>><i onclick="showPassword()" id="togglePassword" alt="Show/Hide Password"><img src="img/eye.png" id="eye"></i>
                 </div>
                 <div>
                     <div>
-                        <input type="submit" name="load" value="Load"><input type="submit" name="update" value="Update">
+                        <input type="submit" name="load" value="Cargar"><input type="submit" name="update" value="Actualizar">
                     </div>
                     <div>
-                        <input type="submit" name="new" value="New"><input type="submit" name="add" value="Add">
+                        <input type="submit" name="new" value="Nuevo"><input type="submit" name="add" value="Añadir a favoritos">
                     </div>
                 </div>
+            </div>
+            <div>
+            	<div style="background-color: black;">
+            		<h2>FAVORITOS</h2>
+            	</div>
+                <?php showFavs(); ?>
             </div>
         </form>
     </div>
     <div class="in-flex">
-        <h2>RECENT POST</h2>
+    	<div style="background-color: black;">
+        	<h2>PUBLICACIONES RECIENTES</h2>
+        </div>
 <?php include("scripts/auth.php"); otherPost(); ?>
+    <!---
     <div class="bottomright"><a href="#"><img src="img/favicon.ico" alt="UP"></a></div>
+        --->
     </div>
 </section>
 </body>
