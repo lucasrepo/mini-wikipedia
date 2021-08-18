@@ -24,7 +24,7 @@ function otherPost(){
 	{
 		while($row = mysqli_fetch_array($result))
 		{
-			echo "\t\t<div>\n\t\t\t<div>\n\t\t\t\t<h3><a href='/index?name=".$row['nombre']."&information=".$row['texto']."'>".$row['nombre']."</a></h3><h4 style='font-size: x-small;'>Last update: ".substr($row['fecha'], 11)."</h4>\n\t\t\t</div>\n\t\t\t<textarea>".$row['texto']."\n\t\t\t</textarea>\t\t</div>\n\n";
+			echo "\t\t<div>\n\t\t\t<div>\n\t\t\t\t<h3><a href='/index?name=".$row['nombre']."&information=".$row['texto']."'>".$row['nombre']."</a></h3><h4 style='font-size: x-small;'>Last update: ".substr($row['fecha'], 11)."</h4>\n\t\t\t</div>\n\t\t\t<textarea>".$row['texto']."</textarea>\t\t</div>\n\n";
 		}
 	}
 }

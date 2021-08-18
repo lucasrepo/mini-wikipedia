@@ -1,4 +1,4 @@
-
+<body style="background-image: url('img/starsbg.gif')">
 <div class="header" id="grad">
     <h1><a href="http://www.landho.epizy.com/index">MyWiki<span class="txt-rotate" data-period="3000" data-rotate='["!", "++;", "?", "--;"]'></span></a><p style="font-size:small;"> <a href="http://www.landho.epizy.com/random/faq.html">FAQ</a> || <a href="http://www.landho.epizy.com/random/about">About</a></p></h1>
 </div>
@@ -24,7 +24,7 @@
                     <input type="text" name="name" id="name" maxlength="30" placeholder="Título" <?php echo value(showInfo("name")); ?>>
                     <input type="password" name="pass" maxlength="30" placeholder="[Contraseña]" id="psw" <?php echo setPassword(); ?>><i onclick="showPassword()" id="togglePassword" alt="Show/Hide Password"><img src="img/eye.png" id="eye"></i>
                 </div>
-                <div>
+                <div class="btn">
                     <div>
                         <input type="submit" name="load" value="Cargar"><input type="submit" name="update" value="Actualizar">
                     </div>
