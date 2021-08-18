@@ -7,8 +7,8 @@
 $name = htmlspecialchars($_POST['name']);
 $text = htmlspecialchars($_POST['t-area']);
 
-/*Si está vacío regresa a home*/
-isEmpty($name);
+isBanned(); /*Se fija si está baneado*/
+isEmpty($name); /*Si está vacío el tituloregresa a home*/
 
 if (exist('load')):
 	
