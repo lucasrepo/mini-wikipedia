@@ -3,6 +3,5 @@
 ## Por realizar:
 * Permitir añadir imágenes.
 * Moderadores, pueden eliminar contenido o fijarlos.
-* Crear un limite con IPv4.
 * Pull requests.
 * Mejorar el diseño.
