@@ -5,9 +5,9 @@ $DATABASE_PASS = '';
 $DATABASE_NAME = 'usuarios';
 
 $conn = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
-if($error = mysqli_connect_errno())
+if($error = mysqli_connect_errno()){
 	header("Location: /index?error=No existe conexión con la base de datos: ".$error); exit;
-
+}
 function otherPost()
 {
 	global $conn;
