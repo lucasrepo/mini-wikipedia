@@ -67,6 +67,7 @@ function showFavs(){
 function showInfo($name, $msg = '') : string {
 	if(isset($_GET[$name])) $msg = $_GET[$name];
 	else if(isset($_SESSION[$name])) $msg = $_SESSION[$name];
+	else $msg = '';
 	return $msg;
 }
 ?>
