@@ -69,3 +69,12 @@ function isBanned()
 		}
 	}
 }
+function location($url="https://en.wikipedia.org/wiki/Remember_the_sabbath_day,_to_keep_it_holy")
+{
+	header("Location: $url"); exit;
+}
+
+function nl2br2($string) {
+	$string = str_replace(array("\r\n", "\r", "\n"), "<br>", $string);
+	return $string;
+} 
