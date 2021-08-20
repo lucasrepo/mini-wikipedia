@@ -85,7 +85,21 @@ elseif (exist('new')): /**** SAVE ****/
     endif;
 
 	$state = "New";
+elseif (exist('ban')): /**** BAN ****/
+    $mydb_query = select($name);
+    if(mysqli_query($conn, $mydb_query)){
+        
+        $mydb_query = "UPDATE general SET banned='".$row['IPV4']."' WHERE nombre='".$row['nombre']."';";
+        
+        if(mysqli_query($conn, $mydb_query)){
+            header("Location: /index?msg=¡Usuario bloqueado con éxito!");
+        }else{
+            homeError(777, "Error sin identificar, repita los pasos y reportalo");
+        }
 
+    }else{
+        homeError(777, "Error sin identificar, repita los pasos y reportalo");
+    }
 else: /**** ERROR ****/
 
 	homeError(222, "Error sin identificar, repita los pasos y reportalo con un moderador");
