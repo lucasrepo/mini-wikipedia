@@ -17,9 +17,17 @@ En _index.php_ se incluye _includes/header.php_ e _includes/footer.php_; quizá 
 ### /scripts:
 _save.php_ se encarga de recibir la petición del usuario y en caso de error, ejecuta [homeError($id, $mensaje)] que devuelve a _index.php_ con un mensaje de alerta. En _querys.php_ se aloja funciones auxiliares.
 
-#### Por realizar
+### Moderador
+En _includes/_ se encuentra _admin.html_ y _admin.php_, el primero es un formulario y el segundo procesa dichos datos. Hay varias cosas que tener en cuenta, no es un inicio de sesión común, primero hay que agregar a la variable **_$ipadmin_** la dirección IPv4 del administrador y en **_$specialkey_** una "llave" que existirá en la base de datos, estas dos variables son temporales, una vez creada la sesión del administrador se deberán eliminar o cambiar por otras. Cuando se desee agregar un nuevo administrador los pasos se deben repetir.
+
+#### ¿Cuáles son sus dependencias?
+* Una base de datos como MariaDB/MySQL.
+* PHP>7.0v
+Con eso es suficiente.
+
+## Por realizar:
 * Permitir añadir imágenes.
 * Opción para moderadores: fijar publicaciones.
 * La opción "Pull requests" para publicaciones privadas.
 * Mejorar el diseño del textarea.
-* Documentar las funciones.
+* Documentar algunas funciones.
