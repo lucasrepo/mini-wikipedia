@@ -12,10 +12,14 @@ En _scripts/auth.php_ se realiza la configuración con los siguientes campos
 * **banned**: Usuarios bloqueados; _null_.
 
 ### Index:
-En _index.php_ se incluye _includes/header.php_ e _includes/footer.php_; quizá se agregen nuevos ficheros como _style.html_ y _script.html_. En el mismo directorio se encuentra _functions.php_ con funciones auxiliares.
+En _index.php_ se incluye _includes/header.php_ e _includes/footer.php_; quizá se divida header en _style.html_ y _script.html_ por su densidad. En el mismo directorio se encuentra _functions.php_ qué, como su nombre lo indica, son funciones auxiliares.
+
+### /scripts:
+_save.php_ se encarga de recibir la petición del usuario y en caso de error, ejecuta [homeError($id, $mensaje)] que devuelve a _index.php_ con un mensaje de alerta. En _querys.php_ se aloja funciones auxiliares.
 
 #### Por realizar
 * Permitir añadir imágenes.
 * Moderadores, pueden eliminar contenido o fijarlos.
-* Pull requests.
-* Mejorar el diseño.
+* La opción "Pull requests" para publicaciones privadas.
+* Mejorar el diseño del text-area.
+* Documentar las funciones.
