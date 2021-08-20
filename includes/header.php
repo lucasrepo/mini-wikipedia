@@ -15,11 +15,20 @@ if(isset($_SESSION['ban'])){
 	<base href="/index" />
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="icon" href="http://www.landho.epizy.com/img/favicon.ico?v=2" />
-    <link rel="preload" href="img/starsbg.gif" as="image">
-    <link rel="preload" href="img/favicon.ico" as="image">
-    <link rel="preload" href="img/eye.png" as="image">
-    <link rel="preload" href="img/eyeslash.png" as="image">
+    <meta name="description" content="Crea, actualiza y carga contenido anónimo en segundos, desde cualquier dispositivo">
+    <meta name="target" content="all"/>
+    <meta name="audience" content="all"/>    
+    <meta name="keywords" content="landho, mywiki, epizy">
+    <?php 
+    if(isset($_SESSION['admin'])) {
+        echo "<meta http-equiv='refresh' content='50' />";
+    }?>
+    <meta name="author" content="senocoseno, makemeceleron@protonmail.com">
+    <link rel="icon" href="http://www.landho.epizy.com/img/favicon.ico?v=2" />
+    <link rel="preload" crossorigin="anonymous" href="img/starsbg.gif" as="image">
+    <link rel="preload" crossorigin="anonymous" href="img/favicon.ico" as="image">
+    <link rel="preload" crossorigin="anonymous" href="img/eye.png" as="image">
+    <link rel="preload" crossorigin="anonymous" href="img/eyeslash.png" as="image">
     <style type="text/css">
         * { padding: 0px; margin: 0px; font-family: Trattatello Verdana; }
         body { background-color: black; ; color: white; }
@@ -35,6 +44,7 @@ if(isset($_SESSION['ban'])){
         .in-flex { flex: 1; min-width: 300px; }
         .in-flex:first-child { flex: 2; margin: 0; }
         .in-flex div { background: #00003F; padding: 5px; margin: 5px; }
+        .in-flex h4 { font-size: x-small; }
         #grad2 { background-image: linear-gradient(to right, #00002F, #00005F); }
         #name::placeholder { color: blue; }
         .center {vertical-align: center; text-align: center; -webkit-box-sizing:border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
@@ -43,6 +53,7 @@ if(isset($_SESSION['ban'])){
         #togglePassword { cursor: pointer; margin-left: -30px; }
         #eye { width: 20px; height: 15px; }
         .btn input { cursor: pointer; }
+        #recent textarea { color: white; background-color: #00003F; border-color: #00003F; min-height: 150px; }
     </style>
     <script>
         function showPassword() {

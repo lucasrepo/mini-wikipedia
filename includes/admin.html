@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Admin Zone</title>
+	<link rel="icon" href="http://www.landho.epizy.com/img/favicon.ico?v=2" />
+	<style type="text/css">
+		.in {text-align: center; background-color: yellow; height: auto; box-sizing: border-box; vertical-align: center; padding: 20px; box-shadow: 10px 10px; }
+		.in input { width: 200px;  padding: 10px; margin: 5px; text-align: center; }
+		.in h4 { width: 100%;  padding: 10px; margin: 5px; text-align: center; }
+	</style>
+</head>
+<body style="background-color:black; color: black; font-family: Verdana;">
+	<form action="log.php" method="post">
+		<div class="in">
+			<h4>¡Esta es la zona de administradores, si no eres uno corres el riesgo de quedar bloqueado!</h4>
+			<div>
+				<input type="text" name="user" placeholder="Usuario">
+				<input type="password" name="pass" placeholder="Contraseña">
+			</div>
+			<input type="submit" name="submit" value="Iniciar sesión">
+    	</div>
+    </form>
+</body>
+</html>

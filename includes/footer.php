@@ -1,6 +1,6 @@
 <body style="background-image: url('img/starsbg.gif')">
 <div class="header" id="grad">
-    <h1><a href="http://www.landho.epizy.com/index">MyWiki<span class="txt-rotate" data-period="3000" data-rotate='["!", "++;", "?", "--;"]'></span></a><p style="font-size:small;"> <a href="http://www.landho.epizy.com/random/faq.html">FAQ</a> || <a href="http://www.landho.epizy.com/random/about">About</a></p></h1>
+    <h1><a href="http://www.landho.epizy.com/index">MyWiki<span class="txt-rotate" data-period="3000" data-rotate='["!", "++;", "?", "--;"]'></span></a><p style="font-size:small;"> <a href="http://www.landho.epizy.com/random/faq.html">FAQ</a> || <a href="http://www.landho.epizy.com/random/about">About</a> || <a href="http://www.landho.epizy.com/includes/admin.html">Admin</a></p></h1>
 </div>
 <section class="home">
     <div class="in-flex">
@@ -32,6 +32,11 @@
                         <input type="submit" name="new" value="Nuevo"><input type="submit" name="add" value="Añadir a favoritos">
                     </div>
                 </div>
+                <?php if(isset($_SESSION['admin'])){ ?>
+                    <div class="btn" style="background-color: gold">
+                        <input type="submit" style="width: 100%; border-color: black" name="ban" value="Ban">
+                    </div>
+                <?php } ?>
             </div>
             <div>
             	<div style="background-color: black;">
@@ -41,7 +46,7 @@
             </div>
         </form>
     </div>
-    <div class="in-flex">
+    <div class="in-flex" id="recent">
     	<div style="background-color: black;">
         	<h2>PUBLICACIONES RECIENTES</h2>
         </div>
