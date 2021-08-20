@@ -19,7 +19,7 @@ _save.php_ se encarga de recibir la petición del usuario y en caso de error, ej
 
 #### Por realizar
 * Permitir añadir imágenes.
-* Moderadores, pueden eliminar contenido o fijarlos.
+* Opción para moderadores: fijar publicaciones.
 * La opción "Pull requests" para publicaciones privadas.
-* Mejorar el diseño del text-area.
+* Mejorar el diseño del textarea.
 * Documentar las funciones.
