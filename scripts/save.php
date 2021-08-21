@@ -5,15 +5,19 @@
 	include("querys.php");
 
 /*Filtro XSS básico*/
-$name = htmlspecialchars($_POST['name']);
-$text = htmlspecialchars($_POST['t-area']);
+$name = isset($_POST['name']) ? htmlspecialchars($_POST['name']) : false;
+$text = isset($_POST['t-area']) ? htmlspecialchars($_POST['t-area']) : false;
 
-isBanned(); /* Si está baneado : wikipedia */
-isEmpty($name); /* Si está vacío : homeError() */
+isBanned();
+isEmpty($name);
+
+if(count($name) >= 30 || count($texto) >= 30000)
+{
+	homeError(0, "Superó el límite establecido");
+}
 
 if (exist('load')): /**** LOAD ****/
 	
-    /* Si existe contenido en bd : false */
 	if(validate($name, $conn) == 0)
 		homeError(0, "El archivo no existe, crea uno nuevo o intenta con otra busqueda");
 
@@ -85,7 +89,9 @@ elseif (exist('new')): /**** SAVE ****/
     endif;
 
 	$state = "New";
+
 elseif (exist('ban')): /**** BAN ****/
+
     $mydb_query = select($name);
     if(mysqli_query($conn, $mydb_query)){
         
@@ -100,7 +106,8 @@ elseif (exist('ban')): /**** BAN ****/
     }else{
         homeError(777, "Error sin identificar, repita los pasos y reportalo");
     }
-else: /**** ERROR ****/
+
+else: /**** Posible intruso ****/
 
 	homeError(222, "Error sin identificar, repita los pasos y reportalo con un moderador");
 
