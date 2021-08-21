@@ -5,8 +5,8 @@
 	include("querys.php");
 
 /*Filtro XSS básico*/
-$name = isset($_POST['name']) ? htmlspecialchars($_POST['name']) : false;
-$text = isset($_POST['t-area']) ? htmlspecialchars($_POST['t-area']) : false;
+$name = isset($_POST['name']) ? htmlspecialchars($_POST['name']) : '';
+$text = isset($_POST['t-area']) ? htmlspecialchars($_POST['t-area']) : '';
 
 isBanned();
 isEmpty($name);
@@ -54,14 +54,25 @@ elseif (exist('update')): /**** UPDATE ****/
         {
             if(!empty($_POST['pass']))
             {
-                if(password_verify($_POST['pass'], $row['contrasenia']))
-                {
-                    $_SESSION['pass'] = $_POST['pass'];
-                    $mydb_query = update($text, $name, getRealIP());
-                } else { homeError(4, "La contraseña no coincide"); }
+            	if($row['intentos'] <= 5)
+            	{
+	                if(password_verify($_POST['pass'], $row['contrasenia']))
+	                {
+	                    $_SESSION['pass'] = $_POST['pass'];
+	                    $mydb_query = update($text, $name, getRealIP(), 0);
+	                }
+	                else
+	                {
+	                	if( mysqli_query( $conn, "UPDATE general SET intentos='".++$row['intentos']."' WHERE nombre='".$name."';" ) )
+	                	{
+	                		homeError(4, "La contraseña no coincide");
+				}else{
+					homeError(5, "La contraseña no coincide");
+	                	}
+	            } else { homeError(2, "Excedió su numero de intentos, vuelva a intentarlo más tarde"); }
             } else { homeError(3, "Este contenido se encuentra protegido, ingresa la contraseña para modificar"); }
         } else { $mydb_query = update($text, $name, getRealIP()); } /*SIN PSW*/
-    } else { homeError(2, "El contenido que busca no existe"); }
+    } else { homeError(2, "El contenido que busca actualizar no existe"); }
 
     $state = "Update";
 
