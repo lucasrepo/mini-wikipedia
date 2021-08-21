@@ -6,7 +6,7 @@ function value($message){
 function alert($message){
 	if(!empty($message)){
 		echo '<script type="text/javascript"> alert("';
-		echo $message;
+		echo htmlspecialchars($message);
 		echo '") </script>';
 	}
 }
@@ -16,34 +16,16 @@ function notification(){
 }
 function title($name, $scd_name){
     if(!empty($name)):
-	    echo "<script> document.title = 'Proyecto: $name' </script>";
+	    echo "<script> document.title = 'Proyecto: ".htmlspecialchars($name)."' </script>";
 	elseif(!empty($scd_name)):
-		echo "<script> document.title = 'Proyecto: $scd_name' </script>";
+		echo "<script> document.title = 'Proyecto: ".htmlspecialchars($scd_name)."' </script>";
     else:
         echo "<script> document.title = 'MyWiki' </script>";
     endif;
 }
-/*
-function dontBack(){
-	if(!empty($_GET))
-	{
-		for($i = 0; $i < count($_SESSION['GET']); $i++)
-		{
-		    if($_SESSION['GET'][$i] == $_GET)
-		    {
-		    	if($_GET['error'])
-		    		alert($_GET['error']);
-		    	header("Refresh:0; url=/index");
-		    	exit;
-		    }
-		}
-		$_SESSION['GET'][] = $_GET;
-	}
-}
-*/
 function setPassword() : string {
     if(isset($_SESSION['pass'])):
-        return "value='".$_SESSION['pass']."'";
+        return "value='".htmlspecialchars($_SESSION['pass'])."'";
     else:
         $arr = str_split('ABCDEFGHIJKLMNOPQRSTXYWZabcdefghijklmnopqrstxyz012345679');
         shuffle($arr); // randomize the array
@@ -65,9 +47,7 @@ function showFavs(){
 	}
 }
 function showInfo($name, $msg = '') : string {
-	if(isset($_GET[$name])) $msg = $_GET[$name];
-	else if(isset($_SESSION[$name])) $msg = $_SESSION[$name];
-	else $msg = '';
-	return $msg;
+	$msg = isset($_GET[$name]) ? $_GET[$name] : '';
+	return $msg = ($msg == '') && isset($_SESSION[$name]) ? $_SESSION[$name] : $msg;
 }
 ?>
