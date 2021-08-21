@@ -26,6 +26,7 @@ En _includes/_ se encuentra _admin.html_ y _admin.php_, el primero es un formula
 Con eso es suficiente.
 
 ## Por realizar:
+* Reemplazar los links del demo
 * Permitir añadir imágenes.
 * Opción para moderadores: fijar publicaciones.
 * La opción "Pull requests" para publicaciones privadas.
