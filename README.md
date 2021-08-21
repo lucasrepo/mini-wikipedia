@@ -10,6 +10,7 @@ En _scripts/auth.php_ se realiza la configuración con los siguientes campos
 * **contrasenia**: VARCHAR(255), tiene que tener un tamaño mayor o igual a 255 por el valor hash;  _null_.
 * **IPV4**: Necesario para administrar, se recoge automaticamente cuando se crea o actualiza una publicación; VARCHAR(); not null.
 * **banned**: Usuarios bloqueados; _null_.
+* **intentos**: Número de intentos para autenticarse y actualizar publicaciones privadas; _null_. 
 
 ### Index:
 En _index.php_ se incluye _includes/header.php_ e _includes/footer.php_; quizá se divida header en _style.html_ y _script.html_ por su densidad. En el mismo directorio se encuentra _functions.php_ qué, como su nombre lo indica, son funciones auxiliares.
