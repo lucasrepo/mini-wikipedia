@@ -14,15 +14,15 @@
                 maxlength="3000"
                 minlength="10" 
                 placeholder="Carga, actualiza o crea una publicación..." 
-                autofocus><?php echo showInfo("information"); ?></textarea>
+                autofocus><?php echo htmlspecialchars(showInfo("information")); ?></textarea>
             </div>
             <div class="center" id="grad2">
                 <?php
                 notification();
                 ?>
                 <div>
-                    <input type="text" name="name" id="name" maxlength="30" placeholder="Título" <?php echo value(showInfo("name")); ?>>
-                    <input type="password" name="pass" maxlength="30" placeholder="[Contraseña]" id="psw" <?php echo setPassword(); ?>><i onclick="showPassword()" id="togglePassword" alt="Show/Hide Password"><img src="img/eye.png" id="eye"></i>
+                    <input type="text" name="name" id="name" maxlength="30" placeholder="Título" <?php echo htmlspecialchars(value(showInfo("name"))); ?>>
+                    <input type="password" name="pass" maxlength="30" placeholder="[Contraseña]" id="psw" <?php echo htmlspecialchars(setPassword()); ?>><i onclick="showPassword()" id="togglePassword" alt="Show/Hide Password"><img src="img/eye.png" id="eye"></i>
                 </div>
                 <div class="btn">
                     <div>

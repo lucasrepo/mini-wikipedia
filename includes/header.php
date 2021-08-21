@@ -2,7 +2,7 @@
 /* FUNCION AUXILIAR */
 	include("functions.php");
 /*dontBack();*/
-if(!empty($_GET['error'])) alert($_GET['error']);
+if(!empty($_GET['error'])) (alert(htmlspecialchars($_GET['error'])));
 if(isset($_SESSION['ban'])){
     header("HTTP/1.1 301 Moved Permanently"); 
     header("Location: https://en.wikipedia.org/wiki/Remember_the_sabbath_day,_to_keep_it_holy"); exit;
@@ -129,5 +129,5 @@ if(isset($_SESSION['ban'])){
         document.body.appendChild(css);
         };
     </script>
-	<?php title($_GET['name'], $_SESSION['name']) ?>
+	<?php title(htmlspecialchars($_GET['name']), $_SESSION['name']) ?>
 </head>
