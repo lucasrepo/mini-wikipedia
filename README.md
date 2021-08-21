@@ -31,4 +31,3 @@ Con eso es suficiente.
 * Opción para moderadores: fijar publicaciones.
 * La opción "Pull requests" para publicaciones privadas.
 * Mejorar el diseño del textarea.
-* Documentar algunas funciones.
