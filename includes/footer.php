@@ -1,6 +1,6 @@
 <body style="background-image: url('img/starsbg.gif')">
 <div class="header" id="grad">
-    <h1><a href="http://www.landho.epizy.com/index">MyWiki<span class="txt-rotate" data-period="3000" data-rotate='["!", "++;", "?", "--;"]'></span></a><p style="font-size:small;"> <a href="http://www.landho.epizy.com/random/faq.html">FAQ</a> || <a href="http://www.landho.epizy.com/random/about">About</a> || <a href="http://www.landho.epizy.com/includes/admin.html">Admin</a></p></h1>
+    <h1><a href="http://www.landho.epizy.com/index">MyWiki<span class="txt-rotate" data-period="3000" data-rotate='["!", "++;", "?", "--;"]'></span></a><p style="font-size:small;"> <a href="http://www.landho.epizy.com/random/faq.html">FAQ</a> || <a href="http://www.landho.epizy.com/random/about">About</a> || <a href="http://www.landho.epizy.com/includes/admin.php">Admin</a></p></h1>
 </div>
 <section class="home">
     <div class="in-flex">
