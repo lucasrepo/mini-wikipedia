@@ -1,7 +1,7 @@
 <?php
 /*
-* @desc carga
-* @param titulo exacto de la publicacion  
+* Selecciona
+* @param string $name titulo exacto de la publicacion  
 * 
 */
 function select($name) : string {
@@ -9,16 +9,17 @@ function select($name) : string {
 	return $s;
 }
 /*
-* @desc actualiza
-* @param contenido de la publicacion, el titulo y la direccion ip
+* Actualiza si los datos son exactos
+* @param string $text contenido de la publicacion
+* @param string $name título
+* @param string $ipv4 direccion ip
 */
 function update($text, $name, $ipv4) : string {
 	$u = "UPDATE general SET texto='" . $text ."', IPV4='". $ipv4 ."' WHERE nombre='". $name ."';";
 	return $u;
 }
 /*
-* @desc crear nueva publicacion
-* @param password por default nulo 
+* Insertar nueva publicacion con o sin contraseña
 */
 function insert($name, $text, $ipv4, $password='') : string {
 	$i = "INSERT INTO general(nombre, texto, contrasenia, IPV4) VALUES ('". $name . "', '" . $text . "', '". $password . "', '". $ipv4 ."');";
@@ -26,7 +27,7 @@ function insert($name, $text, $ipv4, $password='') : string {
 }
 
 /*
-* @return direccion ipv4
+* @return direccion ip
 */
 function getRealIP() : string {
 
@@ -96,8 +97,7 @@ function isBanned()
 	}
 }
 /*
-* Redirige a otra pagina web
-* @param url de la página web
+* @param string $url página a redireccionar
 */
 function location($url="https://en.wikipedia.org/wiki/Remember_the_sabbath_day,_to_keep_it_holy")
 {
