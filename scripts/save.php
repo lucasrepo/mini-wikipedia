@@ -101,14 +101,14 @@ elseif (exist('new')): /**** SAVE ****/
 
 	$state = "New";
 
-elseif (exist('ban')): /**** BAN ****/
+elseif (exist('ban') && isset($_SESSION['admin'])): /**** BAN ****/
 
     $query = "UPDATE general SET banned='".$row['IPV4']."' WHERE nombre='".$name."';";
     $msg = "http://landho.epizy.com/index?msg=¡Usuario bloqueado con éxito!";
 
     adminOptions($conn, $query, $msg);
 
-elseif (exist('sticky')): /**** STICKY *****/
+elseif (exist('sticky') && isset($_SESSION['admin'])): /**** STICKY *****/
 
     $query = "UPDATE general SET fijado=TRUE WHERE nombre='".$name."';";
     $msg = "http://landho.epizy.com/index?msg=¡Publicación fijada con éxito!";
