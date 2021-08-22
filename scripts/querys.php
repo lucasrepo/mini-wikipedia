@@ -1,7 +1,7 @@
 <?php
 /*
-* Selecciona
-* @param string $name titulo exacto de la publicacion  
+* @desc carga
+* @param titulo exacto de la publicacion  
 * 
 */
 function select($name) : string {
@@ -9,17 +9,17 @@ function select($name) : string {
 	return $s;
 }
 /*
-* Actualiza si los datos son exactos
-* @param string $text contenido de la publicacion
-* @param string $name título
-* @param string $ipv4 direccion ip
+* @desc actualiza
+* @param contenido de la publicacion, el titulo y la direccion ip
+* @param int $intentos de sesion, cero si no tiene contraseña  
 */
-function update($text, $name, $ipv4) : string {
-	$u = "UPDATE general SET texto='" . $text ."', IPV4='". $ipv4 ."' WHERE nombre='". $name ."';";
+function update($text, $name, $ipv4, $intentos=0) : string {
+	$u = "UPDATE general SET texto='" . $text ."', IPV4='". $ipv4 ."', intentos='".$intentos."' WHERE nombre='". $name ."';";
 	return $u;
 }
 /*
-* Insertar nueva publicacion con o sin contraseña
+* @desc crear nueva publicacion
+* @param password por default nulo 
 */
 function insert($name, $text, $ipv4, $password='') : string {
 	$i = "INSERT INTO general(nombre, texto, contrasenia, IPV4) VALUES ('". $name . "', '" . $text . "', '". $password . "', '". $ipv4 ."');";
@@ -27,7 +27,7 @@ function insert($name, $text, $ipv4, $password='') : string {
 }
 
 /*
-* @return direccion ip
+* @return direccion ipv4
 */
 function getRealIP() : string {
 
@@ -63,7 +63,7 @@ function isEmpty($name)
 
 function homeError($number, $message)
 {
-	header("Location: /index?error=error " . $number . ": $message."); exit;
+	header("Location: /index?error=" . $number . ": $message."); exit;
 }
 
 function unsetSuperglobalGet($name)
@@ -79,10 +79,10 @@ function unsetSuperglobalSession($name)
 /*
 * Consulta si fue bloqueado por su direccion ip. 
 * Si existe registro se elimina su contenido excepto el titulo y la dirección baneada
+* @param $conn conexión con la base de datos
 */
-function isBanned()
+function isBanned($conn)
 {
-	global $conn;
 	$user_ip = getRealIP();
 	$query = "SELECT banned FROM general WHERE banned='".$user_ip."' LIMIT 1;";
 	
@@ -97,9 +97,34 @@ function isBanned()
 	}
 }
 /*
-* @param string $url página a redireccionar
+* Redirige a otra pagina web
+* @param url de la página web
 */
 function location($url="https://en.wikipedia.org/wiki/Remember_the_sabbath_day,_to_keep_it_holy")
 {
 	header("Location: $url"); exit;
+}
+/*
+* Peticiones sencillas para base de datos. Usadas para banear y fijar publicaciones
+* @param $conn conexión con la base de datos
+* @param string $admin_query peticion que se realizará con el usuario
+* @param string $location_msg Redirige y envía un mensaje al administrador
+*/
+function adminOptions($conn, $admin_query, $location_msg)
+{
+    $mydb_query = select($name);
+
+    if(mysqli_query($conn, $mydb_query)){
+        
+        $query = $admin_query;
+
+        if(mysqli_query($conn, $query)){
+            location($location_msg);
+        }else{
+            homeError(775, "Error sin identificar, repita los pasos y reportalo");
+        }
+
+    }else{
+        homeError(773, "Error sin identificar, repita los pasos y reportalo");
+    }
 }

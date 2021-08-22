@@ -8,7 +8,7 @@
 $name = isset($_POST['name']) ? htmlspecialchars($_POST['name']) : '';
 $text = isset($_POST['t-area']) ? htmlspecialchars($_POST['t-area']) : '';
 
-isBanned();
+isBanned($conn);
 isEmpty($name);
 
 if(count($name) >= 30 || count($texto) >= 30000)
@@ -103,40 +103,17 @@ elseif (exist('new')): /**** SAVE ****/
 
 elseif (exist('ban')): /**** BAN ****/
 
-    $mydb_query = select($name);
+    $query = "UPDATE general SET banned='".$row['IPV4']."' WHERE nombre='".$name."';";
+    $msg = "http://landho.epizy.com/index?msg=¡Usuario bloqueado con éxito!";
 
-    if(mysqli_query($conn, $mydb_query)){
-        
-        $mydb_query = "UPDATE general SET banned='".$row['IPV4']."' WHERE nombre='".$row['nombre']."';";
-        
-        if(mysqli_query($conn, $mydb_query)){
-            header("Location: /index?msg=¡Usuario bloqueado con éxito!");
-        }else{
-            homeError(777, "Error sin identificar, repita los pasos y reportalo");
-        }
-
-    }else{
-        homeError(777, "Error sin identificar, repita los pasos y reportalo");
-    }
+    adminOptions($conn, $query, $msg);
 
 elseif (exist('sticky')): /**** STICKY *****/
 
-    $mydb_query = select($name);
+    $query = "UPDATE general SET fijado=TRUE WHERE nombre='".$name."';";
+    $msg = "http://landho.epizy.com/index?msg=¡Publicación fijada con éxito!";
 
-    if(mysqli_query($conn, $mydb_query)){
-        
-        $query = "UPDATE general SET fijado=TRUE WHERE nombre='".$name."';";
-        $state = "fijado";
-
-        if(mysqli_query($conn, $query)){
-            location("http://landho.epizy.com/index?msg=¡Publicación fijada con éxito!");
-        }else{
-            homeError(777, "Error sin identificar, repita los pasos y reportalo");
-        }
-
-    }else{
-        homeError(777, "Error sin identificar, repita los pasos y reportalo");
-    }
+    adminOptions($conn, $query, $msg);
 
 else: /**** Posible intruso ****/
 
