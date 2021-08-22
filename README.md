@@ -29,6 +29,6 @@ Con eso es suficiente.
 ## Por realizar:
 * Reemplazar los links del demo
 * Permitir añadir imágenes.
-* Opción para moderadores: fijar publicaciones.
+* Moderadores: recibir alertas por nuevas publicaciones
 * La opción "Pull requests" para publicaciones privadas.
 * Mejorar el diseño del textarea.
