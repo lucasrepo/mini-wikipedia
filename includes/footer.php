@@ -33,8 +33,8 @@
                     </div>
                 </div>
                 <?php if(isset($_SESSION['admin'])){ ?>
-                    <div class="btn" style="background-color: gold">
-                        <input type="submit" style="width: 100%; border-color: black" name="ban" value="Ban">
+                    <div class="btn" style="background-color: gold;">
+                        <input type="submit" style="width: 50%; border-color: black" name="ban" value="Ban"><input type="submit" style="width: 50%; border-color: black;" name="sticky" value="Fijar">
                     </div>
                 <?php } ?>
             </div>
@@ -43,6 +43,10 @@
             		<h2>FAVORITOS</h2>
             	</div>
                 <?php showFavs(); ?>
+                <div style="background-color: black;">
+                	<h2>STICKY</h2>
+                </div>
+                <?php include("scripts/auth.php"); fijado(); ?>
             </div>
         </form>
     </div>
@@ -50,7 +54,7 @@
     	<div style="background-color: black;">
         	<h2>PUBLICACIONES RECIENTES</h2>
         </div>
-<?php include("scripts/auth.php"); otherPost(); ?>
+	<?php otherPost(); ?>
     <!---
     <div class="bottomright"><a href="#"><img src="img/favicon.ico" alt="UP"></a></div>
         --->
