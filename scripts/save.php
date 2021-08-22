@@ -63,12 +63,12 @@ elseif (exist('update')): /**** UPDATE ****/
 	                }
 	                else
 	                {
+	                	$limite = 5;
 	                	if( mysqli_query( $conn, "UPDATE general SET intentos='".++$row['intentos']."' WHERE nombre='".$name."';" ) )
 	                	{
 	                		homeError(4, "La contraseña no coincide");
-				}else{
-					homeError(5, "La contraseña no coincide");
 	                	}
+	                }
 	            } else { homeError(2, "Excedió su numero de intentos, vuelva a intentarlo más tarde"); }
             } else { homeError(3, "Este contenido se encuentra protegido, ingresa la contraseña para modificar"); }
         } else { $mydb_query = update($text, $name, getRealIP()); } /*SIN PSW*/
@@ -104,12 +104,32 @@ elseif (exist('new')): /**** SAVE ****/
 elseif (exist('ban')): /**** BAN ****/
 
     $mydb_query = select($name);
+
     if(mysqli_query($conn, $mydb_query)){
         
         $mydb_query = "UPDATE general SET banned='".$row['IPV4']."' WHERE nombre='".$row['nombre']."';";
         
         if(mysqli_query($conn, $mydb_query)){
             header("Location: /index?msg=¡Usuario bloqueado con éxito!");
+        }else{
+            homeError(777, "Error sin identificar, repita los pasos y reportalo");
+        }
+
+    }else{
+        homeError(777, "Error sin identificar, repita los pasos y reportalo");
+    }
+
+elseif (exist('sticky')): /**** STICKY *****/
+
+    $mydb_query = select($name);
+
+    if(mysqli_query($conn, $mydb_query)){
+        
+        $query = "UPDATE general SET fijado=TRUE WHERE nombre='".$name."';";
+        $state = "fijado";
+
+        if(mysqli_query($conn, $query)){
+            location("http://landho.epizy.com/index?msg=¡Publicación fijada con éxito!");
         }else{
             homeError(777, "Error sin identificar, repita los pasos y reportalo");
         }
